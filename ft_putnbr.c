@@ -24,7 +24,3 @@ int ft_putnbr(int nb)
    return (n);
     
 }
-// int main()
-// {
-//     printf("%d", ft_putnbr(50));
-// }

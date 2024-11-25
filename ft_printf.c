@@ -1,12 +1,14 @@
 #include "ft_printf.h"
 #include <stdio.h>
+
+
+
 int ft_printf(char * format, ...)
 {
     int i = 0;
     int b = 0;
-    char c;
     va_list p;
-
+    
     va_start(p, format);
     while (format[i])
     {
@@ -14,13 +16,18 @@ int ft_printf(char * format, ...)
         {
             b += ft_putnbr(va_arg(p, int));
         }
-        if (format[i] == '%' && format[i + 1] == 'c')
+        else if (format[i] == '%' && format[i + 1] == 's')
         {
-           c += va_arg(p, int);
-           ft_putchar(c);
+            b += ft_putstr(va_arg(p, char *));
+            i++;
         }
-        else if  (format[i - 1] != '%')
-           b += write(1, &format[i],1);
+        else if (format[i] == '%' && format[i + 1] == 'c')
+        {
+            b += ft_putchar(va_arg(p, int));
+            i++;
+        }
+        else if  (format[i] != '%')
+           b += write(1, &format[i], 1);
         i++;
     }
     return (b);
@@ -28,8 +35,8 @@ int ft_printf(char * format, ...)
 }
 int main ()
 {
-    char k, t = 'v';
-    printf("%c%cfdfdf%", k, t);
+    char k[] = "hello";
+    ft_printf("ssw%morld", k);
     // j = printf("\njjl%dvdd%dd\n", 55, 4);
     // printf("%d\n", j);
 }
