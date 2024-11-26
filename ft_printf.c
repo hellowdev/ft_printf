@@ -1,42 +1,48 @@
 #include "ft_printf.h"
 #include <stdio.h>
 
+int checker(char *form, va_list p)
+{
+    int i = 0;
+    int o = 0;
+    if (form[i] == '%' && form[i + 1] == 'c')
+            o += ft_putchar(va_arg(p, int));
+    else if (form[i] == '%' && form[i + 1] == 's')
+            o += ft_putstr(va_arg(p, char *));
+    // else if (form[i] == '%' && (form[i + 1] == 'd' || form[i + 1] == 'i'))
+    //     o += ft_putnbr(va_arg(p, int), &o);
+    else if (form[i] == '%')
+           o += write(1, &form[i + 1], 1);
+    else
+          o += write(1, &form[i], 1);
 
+    
+    return o;
+    
+}
 
 int ft_printf(char * format, ...)
 {
     int i = 0;
     int b = 0;
     va_list p;
-    
     va_start(p, format);
+
     while (format[i])
-    {
-        if (format[i] == '%' && format[i + 1] == 'd')
-        {
-            b += ft_putnbr(va_arg(p, int));
-        }
-        else if (format[i] == '%' && format[i + 1] == 's')
-        {
-            b += ft_putstr(va_arg(p, char *));
+    {   
+        
+       b+= checker(&format[i], p);
+        if (format[i] == '%')
             i++;
-        }
-        else if (format[i] == '%' && format[i + 1] == 'c')
-        {
-            b += ft_putchar(va_arg(p, int));
-            i++;
-        }
-        else if  (format[i] != '%')
-           b += write(1, &format[i], 1);
         i++;
     }
-    return (b);
+   return (b);
+}   
     
-}
 int main ()
 {
-    char k[] = "hello";
-    ft_printf("ssw%morld", k);
-    // j = printf("\njjl%dvdd%dd\n", 55, 4);
-    // printf("%d\n", j);
+    char k[] = "help";
+
+      ft_printf("%d", ft_printf("%s\n", k));
+    
 }

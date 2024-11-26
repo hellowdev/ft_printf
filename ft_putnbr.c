@@ -1,11 +1,11 @@
 #include "ft_printf.h"
 
-int ft_putnbr(int nb)
+int ft_putnbr(int nb, int *count)
 {
-   long int n = nb;
+   long int n = nb; 
     if (n >= 0 && n <= 9)
     {
-        ft_putchar(n + '0');
+        *count += ft_putchar(n + '0');
     }
    if (n > 9)
    {
@@ -16,9 +16,8 @@ int ft_putnbr(int nb)
    if (n < 0)
    {
         n *= -1;
-        ft_putchar('-');
+       *count += ft_putchar('-');
         ft_putnbr(n);
-        
    }
    
    return (n);
