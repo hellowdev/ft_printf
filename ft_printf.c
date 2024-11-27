@@ -7,8 +7,6 @@ int checker(char *form, va_list p)
     int o = 0;
     if (form[i] == '%' && form[i + 1] == 'c')
             o += ft_putchar(va_arg(p, int));
-
-        
     else if (form[i] == '%' && form[i + 1] == 's')
         o += ft_putstr(va_arg(p, char *));
     else if (form[i] == '%' && (form[i + 1] == 'd' || form[i + 1] == 'i'))
@@ -28,10 +26,9 @@ int ft_printf(char * format, ...)
     int b = 0;
     va_list p;
     va_start(p, format);
-
-    while (format[i])
-    {   
-        
+ 
+    while (format[i])   
+    {
        b += checker(&format[i], p);
         if (format[i] == '%')
             i++;
@@ -43,9 +40,10 @@ int ft_printf(char * format, ...)
     
 int main ()
 {
+
     // char  k[] = "hello";
-    int f = 56;
-int n = ft_printf("%d\n", f);
-      printf("%d", n);
+    // int f = 562;
+int n = ft_printf("%d", -2147483648);
+      ft_printf("\n%d", n);
 
 }

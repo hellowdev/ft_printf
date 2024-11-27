@@ -4,23 +4,21 @@ int tol(int elen)
 {
    int i;
    i = 0;
+   if (elen == 0)
+      i++;
+   if (elen < 0)
+      i++;
    while (elen != 0)
    {
       elen = elen / 10;
       i++;
    }
-   if (elen == 0)
-      i++;
-   if (elen < 0)
-      i++;
-
    return (i);
 }
 
-int ft_putnbr(int nb)
+int ft_putnbr(long int n)
 {
-   long int n = nb; 
-   int count = tol(nb);
+   int count = tol(n);
    
     if (n >= 0 && n <= 9)
     {
@@ -38,7 +36,6 @@ int ft_putnbr(int nb)
         ft_putchar('-');
         ft_putnbr(n);
    }
-   
    return (count);
     
 }
