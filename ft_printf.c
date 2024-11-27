@@ -7,16 +7,17 @@ int checker(char *form, va_list p)
     int o = 0;
     if (form[i] == '%' && form[i + 1] == 'c')
             o += ft_putchar(va_arg(p, int));
-    else if (form[i] == '%' && form[i + 1] == 's')
-            o += ft_putstr(va_arg(p, char *));
-    // else if (form[i] == '%' && (form[i + 1] == 'd' || form[i + 1] == 'i'))
-    //     o += ft_putnbr(va_arg(p, int), &o);
-    else if (form[i] == '%')
-           o += write(1, &form[i + 1], 1);
-    else
-          o += write(1, &form[i], 1);
 
-    
+        
+    else if (form[i] == '%' && form[i + 1] == 's')
+        o += ft_putstr(va_arg(p, char *));
+    else if (form[i] == '%' && (form[i + 1] == 'd' || form[i + 1] == 'i'))
+        o += ft_putnbr(va_arg(p, int));
+    else if (form[i] == '%')
+        o += write(1, &form[i + 1], 1);
+    else
+        o += write(1, &form[i], 1);
+
     return o;
     
 }
@@ -31,18 +32,20 @@ int ft_printf(char * format, ...)
     while (format[i])
     {   
         
-       b+= checker(&format[i], p);
+       b += checker(&format[i], p);
         if (format[i] == '%')
             i++;
         i++;
     }
+    printf(" b = %d\n", b);
    return (b);
 }   
     
 int main ()
 {
-    char k[] = "help";
+    // char  k[] = "hello";
+    int f = 56;
+int n = ft_printf("%d\n", f);
+      printf("%d", n);
 
-      ft_printf("%d", ft_printf("%s\n", k));
-    
 }

@@ -1,11 +1,30 @@
 #include "ft_printf.h"
 
-int ft_putnbr(int nb, int *count)
+int tol(int elen)
+{
+   int i;
+   i = 0;
+   while (elen != 0)
+   {
+      elen = elen / 10;
+      i++;
+   }
+   if (elen == 0)
+      i++;
+   if (elen < 0)
+      i++;
+
+   return (i);
+}
+
+int ft_putnbr(int nb)
 {
    long int n = nb; 
+   int count = tol(nb);
+   
     if (n >= 0 && n <= 9)
     {
-        *count += ft_putchar(n + '0');
+        ft_putchar(n + '0');
     }
    if (n > 9)
    {
@@ -16,10 +35,10 @@ int ft_putnbr(int nb, int *count)
    if (n < 0)
    {
         n *= -1;
-       *count += ft_putchar('-');
+        ft_putchar('-');
         ft_putnbr(n);
    }
    
-   return (n);
+   return (count);
     
 }
