@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int tol(int elen)
+static int tol(int elen)
 {
    int i;
    i = 0;
