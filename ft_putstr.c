@@ -11,5 +11,5 @@ int ft_putstr(char *str)
         i++;
     }
     return (i);
-    
+
 }

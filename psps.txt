@@ -1,0 +1,1 @@
+explain to me the va_list and va_args and va_start and va_end there type were do we found them how they store data wrer it stored and aftr that give me example for u use all of them and tell me in each step how the memory vary and represen it in a table and give me the value that va_list point to
