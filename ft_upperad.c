@@ -1,45 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_undecimal.c                                     :+:      :+:    :+:   */
+/*   ft_upperad.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ychedmi <ychedmi@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/30 23:24:11 by ychedmi           #+#    #+#             */
-/*   Updated: 2024/11/30 23:26:20 by ychedmi          ###   ########.fr       */
+/*   Created: 2024/11/30 23:16:55 by ychedmi           #+#    #+#             */
+/*   Updated: 2024/11/30 23:19:59 by ychedmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	tol(unsigned int elen)
+void	revien(unsigned int p)
+{
+	if (p >= 0 && p <= 9)
+		ft_putchar(p + '0');
+	else if (p > 15)
+	{
+		revien(p / 16);
+		revien(p % 16);
+	}
+	else if ((p % 16 >= 10) && (p % 16 <= 15))
+		ft_putchar(p + 55);
+}
+
+int	counter(unsigned int n)
 {
 	int	i;
 
 	i = 0;
-	if (elen == 0)
-		i++;
-	while (elen != 0)
+	if (n == 0)
+		return (1);
+	while (n != 0)
 	{
-		elen = elen / 10;
+		n = n / 16;
 		i++;
 	}
 	return (i);
 }
 
-int	ft_undecimal(unsigned int n)
+int	ft_upperad(unsigned int c)
 {
-	int	i;
+	int	t;
 
-	i = tol(n);
-	if (n >= 0 && n <= 9)
-	{
-		ft_putchar(n + '0');
-	}
-	if (n > 9)
-	{
-		ft_undecimal(n / 10);
-		ft_undecimal(n % 10);
-	}
-	return (i);
+	t = counter(c);
+	revien(c);
+	return (t);
 }

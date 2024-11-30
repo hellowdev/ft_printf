@@ -1,50 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_padress.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ychedmi <ychedmi@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/30 23:03:15 by ychedmi           #+#    #+#             */
+/*   Updated: 2024/11/30 23:09:55 by ychedmi          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
-#include <stdio.h>
-int 	len(long n)
+
+void	recur(unsigned long p)
 {
-    int i = 0;
-    if (n == 0)
-        return 1;
-    while (n != 0)
-   {
-    // printf("%ld\n", n);
-      n = n / 16;
-      i++;
-   }
-   
-	return i;
+	if (p >= 0 && p <= 9)
+		ft_putchar(p + '0');
+	else if (p > 15)
+	{
+		recur(p / 16);
+		recur(p % 16);
+	}
+	else if ((p % 16 >= 10) && (p % 16 <= 15))
+		ft_putchar(p + 87);
 }
 
-int    ft_padress(void *c)
+int	len(unsigned long n)
 {
-    long p = (long)c;
-    int t = len(p);
-    // printf("%d\n", t);
+	int	i;
 
-    if (t == 9 || c == NULL)
-        t += write(1, "0x", 2);
-    
-    else if (p >= 0 && p <= 9)
-        ft_putchar(p + '0');
-
-   else if (p > 15)
-   {
-    ft_padress((void*)(p / 16));
-    ft_padress((void*)(p % 16));
-   }
-   else if ((p % 16 >= 10) && (p % 16 <= 15))
-          ft_putchar(p + 87);
-    
-    return t;
+	i = 0;
+	if (n == 0)
+		return (1);
+	while (n != 0)
+	{
+		n = n / 16;
+		i++;
+	}
+	return (i);
 }
-// int main ()
-// {
-// 	int v;
-//     int l;
-//     int t;
-// 	l = ft_padress(&v);
-//      printf("\n%d\n", l);
-// 	t = printf("%p", &v);
-//     printf("\n%d", t);
 
-// }
+int	ft_padress(void *c)
+{
+	unsigned long	p;
+	int				t;
+
+	p = (unsigned long)c;
+	t = len(p);
+	t += write(1, "0x", 2);
+	recur(p);
+	return (t);
+}
